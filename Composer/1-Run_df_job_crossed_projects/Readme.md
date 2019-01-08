@@ -15,9 +15,17 @@ In this particular use case we have the following requirements:
 
 STEPS:
 
+Before you begin:
+
+You'll use the two files that are in in this repo "DAG_using_DFPythonOperator.py" and "DAG_using_BashOperator.py". You'll need to do the following changes to those files:
+
+Change <>
+
 1. Create Project B and enable Composer API.
 2. Create Composer Environment in project B.
 3. Create Project A and enable Dataflow API.
+- Create Bucket inside Project A (to place staging,temp and output files from Dataflow Job).
+
 4. Create SA in project A <SA-name@project-id.iam.gserviceaccount.com> and grant it the appropriate permissions so that it can launch a DF job:
 <ul>
 <li>Compute Admin</li>
@@ -39,9 +47,14 @@ STEPS:
 
 -- Project ID: "your-project-A-ID"
     
--- Keyfile Path or Keyfile JSON: (Either upload the previously generated SA keyfile in step 5 to Composer Cloud Storage bucket path (/home/airflow/gcs/data/<your-dataflow-SA-key.json>) and add the path to Keyfile Path field or add the raw keyfile JSON).
+-- Keyfile Path or Keyfile JSON: (Either upload the previously generated SA keyfile in step 5 to Composer Cloud Storage bucket path (/home/airflow/gcs/data/<your-dataflow-SA-key.json>) and add the path to Keyfile Path field or add the contents of the file directly to Keyfile JSON).
 
-7. Load the code file "DAG_using_DFPythonOperator.py" to your DAG folder. (Change the gcp_conn_id name to the one you have given to the connection created in step 6)
+7. You'll need to load the code file "DAG_using_DFPythonOperator.py" to your DAG folder, but before doing so perform the following changes to the file:
+- Change "staging-bucket" with the name of the bucket you created in step 3.
+- Change "project-A" to your ProjectA id created in Step 3.
+- Load the "wordcount.py" file in this repo to your data/ folder in your Cloud Storage bucket associated to your Cloud Composer environment (run "gcloud composer environments describe "your-cloud-composer-env" --location "your-composer-env-location"" to see your bucket name) 
+- Change the gcp_conn_id name to the one you have given to the connection created in step 6.
+
 8. This will not work and it should throw some error like the following:
 
 "IOError: Could not upload to GCS path gs://\\<staging-bucket\\>/.../... access denied. Please verify that credentials are valid and that you have write access to the specified path."
@@ -50,5 +63,9 @@ My staging bucket is in ProjectA, and the SA which should be used for the connec
 
 9. Although not that neat, we can use the following workaround: 
 
-Only using BashOperator to launch the Job without using the DataflowPythonOperator. To use this approach load the file "DAG_using_BashOperator.py" to your DAG folder.
+Only using BashOperator to launch the Job without using the DataflowPythonOperator. To use this approach load the file "DAG_using_BashOperator.py" to your DAG folder. Before doing so do:
 
+
+- Locate the keyjson file created in step 5 to your data/ folder in your Cloud Storage bucket associated to your Cloud Composer environment (we will need to export our GOOGLE_APPLICATION_CREDENTIALS to this path). Now change "your-project-A-sa.json" to your KeyJson filename.
+- Change "staging-bucket" with the name of the bucket you created in step 3.
+- Change "project-A" to your ProjectA-id created in Step 3.
