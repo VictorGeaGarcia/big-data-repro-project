@@ -20,7 +20,7 @@ In this particular use case we have the following requirements:
 3. Create Project A and enable Dataflow API.
 - Create Bucket inside Project A (to place staging,temp and output files from Dataflow Job).
 
-4. Create SA in project A <SA-name@project-id.iam.gserviceaccount.com> and grant it the appropriate permissions so that it can launch a DF job:
+4. Create SA in project A `SA-name@project-id.iam.gserviceaccount.com` and grant it the appropriate permissions so that it can launch a DF job:
 <ul>
 <li>Compute Admin</li>
 <li>Dataflow Admin</li>
@@ -28,7 +28,7 @@ In this particular use case we have the following requirements:
 <li>Storage Object Admin</li>
 </ul>
 
-5. Create a keyjson file for your SA <SA-name@project-id.iam.gserviceaccount.com>, download it and keep it. 
+5. Create a keyjson file for your SA `SA-name@project-id.iam.gserviceaccount.com`, download it and keep it. 
 6. To use the `gcp_conn_id` parameter in DataflowPythonOperator we need to do the following (https://cloud.google.com/composer/docs/how-to/managing/connections#creating_new_airflow_connections):
 
 - Go to your Airflow UI --> Admin --> Connections
