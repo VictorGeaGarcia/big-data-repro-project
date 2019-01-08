@@ -12,7 +12,7 @@ In this particular use case we have the following requirements:
 <li><a href=https://airflow.apache.org/integration.html#dataflowpythonoperator>We will use DataflowPythonOperator and its gcp_conn_id parameter </a> </li>
 </ul>
 
-## STEP:  ##
+## STEPS:  ##
 
 
 1. Create Project B and enable Composer API.
