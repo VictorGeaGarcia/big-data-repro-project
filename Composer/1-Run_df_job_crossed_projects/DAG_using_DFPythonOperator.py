@@ -23,9 +23,9 @@ with models.DAG(
 		    task_id='df-conn-gcp-id-from-json',
 		    py_file='/home/airflow/gcs/data/wordcount.py',
 		    options={'runner':'DataflowRunner',
-			     'output':'gs://staging-bucket-hijo-project/out',
-			     'temp_location':'gs://staging-bucket-hijo-project/teemp',
-			     'staging_location':'gs://staging-bucket-hijo-project/staging',
-			     'project':'hijo-project'},
-		    gcp_conn_id='cloud-dataflow-hijo-project-from-location')
+			     'output':'gs://staging-bucket/out',
+			     'temp_location':'gs://staging-bucket/teemp',
+			     'staging_location':'gs://staging-bucket/staging',
+			     'project':'project-A-id'},
+		    gcp_conn_id='your-gcp-conn-id-name')
     bash_nothing >> run_dataflow_python
