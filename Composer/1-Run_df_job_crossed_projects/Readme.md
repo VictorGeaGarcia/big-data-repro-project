@@ -14,7 +14,6 @@ In this particular use case we have the following requirements:
 
 ## STEPS:  ##
 
-
 1. Create Project B and enable Composer API.  `project-B-id`
 2. Create Composer Environment in project B.  `composer-env-name`
 3. Create Project A and enable Dataflow API.  `project-A-id`
